@@ -65,7 +65,7 @@ public class Digraph {
 		//add the edges for each vertex
 		for(Map.Entry<Vertex,ArrayList<Vertex>> entry : mGraph.entrySet()) {
 			Vertex key = entry.getKey();
-			System.out.println(key);
+			//System.out.println(key);
 			ArrayList<Vertex> temp2  = createAdj(key);
 			
 			//System.out.println(temp2);
@@ -76,7 +76,7 @@ public class Digraph {
 		}
 
 		
-		//printMap();
+		printMap();
 
 
 	}
@@ -110,7 +110,7 @@ public class Digraph {
 		char oppositeColor = flipColor(v.color);
 
 		//Nodes that point south
-		if(v.direction == "S"){
+		if(v.direction != null && v.direction.equals("S")){
 			if(v.row != 7){
 
 				for(Vertex i: storage){
@@ -127,7 +127,7 @@ public class Digraph {
 
 
 		//node that point North
-		if(v.direction == "N"){
+		if(v.direction != null && v.direction.equals("N")){
 			if(v.row != 1){
 
 				for(Vertex i: storage){
@@ -144,7 +144,7 @@ public class Digraph {
 
 
 		//node that point West
-		if(v.direction == "W"){
+		if(v.direction != null && v.direction.equals("W")){
 			if(v.col != 1){
 
 				for(Vertex i: storage){
@@ -161,7 +161,7 @@ public class Digraph {
 
 
 		//node that point East
-		if(v.direction == "E"){
+		if(v.direction != null && v.direction.equals("E")){
 			if(v.col != 7){
 
 				for(Vertex i: storage){
@@ -177,7 +177,7 @@ public class Digraph {
 		}
 
 		//node that points southeast
-		if(v.direction == "SE"){
+		if(v.direction != null && v.direction.equals("SE")){
 
 			if(v.row != 7 ||v.col != 7){
 
@@ -203,7 +203,7 @@ public class Digraph {
 
 
 		//node that points northeast
-		if(v.direction == "NE"){
+		if(v.direction != null && v.direction.equals("NE")){
 
 			if(v.row != 1 ||v.col != 7){
 
@@ -229,7 +229,7 @@ public class Digraph {
 
 
 		//node that points southwest
-		if(v.direction == "SW"){
+		if(v.direction != null && v.direction.equals("SW")){
 
 			if(v.row != 7 ||v.col != 1){
 
@@ -255,7 +255,7 @@ public class Digraph {
 
 
 		//node that points northwest
-		if(v.direction == "NW"){
+		if(v.direction != null && v.direction.equals("NW")){
 
 			if(v.row != 1 ||v.col != 1){
 

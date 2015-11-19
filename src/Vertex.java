@@ -22,7 +22,7 @@ public class Vertex  {
 
 	@Override
 	public String toString() {
-		return "Vertex [row=" + row + ", col=" + col + ", color=" + color
+		return "[row=" + row + ", col=" + col + ", color=" + color
 				+ ", direction=" + direction + ", isCircle=" + isCircle + "]";
 	}
 }
