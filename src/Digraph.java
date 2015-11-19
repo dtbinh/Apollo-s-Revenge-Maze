@@ -2,10 +2,12 @@ import java.awt.Point;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -18,7 +20,7 @@ import java.util.TreeMap;
 public class Digraph {
 
 
-	private final static Map<Vertex, ArrayList<Vertex>> mGraph = new LinkedHashMap<Vertex, ArrayList<Vertex>>();
+	private final static LinkedHashMap<Vertex, ArrayList<Vertex>> mGraph = new LinkedHashMap<Vertex, ArrayList<Vertex>>();
 	private ArrayList<Vertex> storage;
 	public final static boolean reverseMode = false;
 
@@ -33,7 +35,7 @@ public class Digraph {
 			reader = new FileReader("input.txt");
 			scan = new Scanner(reader);
 			scan.nextLine();
-
+			boolean visited = false;
 			while(scan.hasNextLine()){
 
 				//read in unflipped nodes
@@ -45,13 +47,13 @@ public class Digraph {
 
 
 				//add a unflipped node to the graph
-				Vertex v1 = new Vertex(row, col, color, circle, direction);
+				Vertex v1 = new Vertex(row, col, color, circle, direction, visited);
 				addNode(v1);
 				storage.add(v1);
 
 				//add a flipped node to the graph
 				direction = flipDirection(direction);
-				Vertex v2 = new Vertex(row, col, color, circle, direction);
+				Vertex v2 = new Vertex(row, col, color, circle, direction, visited);
 				addNode(v2);
 
 			}
@@ -282,7 +284,6 @@ public class Digraph {
 		return temp;
 	}
 
-
 	public static String flipDirection(String d){
 
 		String flip = null;
@@ -330,18 +331,30 @@ public class Digraph {
 		}
 	}
 
+	
+	public static void BFS(Vertex root, LinkedHashMap<Vertex, ArrayList<Vertex>> map) {
+	    Deque<Vertex> myQ = new LinkedList<Vertex>();
+	    myQ.add(root);
+	    while(!myQ.isEmpty()) {
+	        Vertex current = myQ.getFirst();
+	        current.visited = true;
+	        //System.out.println("(" + current.row + ", " + current.col + ")");
+	        // Or you can store a set of visited vertices somewhere
+	        ArrayList<Vertex> neighbors = map.get(current);
+	        for (Vertex neighbor : neighbors) {
+	            if (!neighbor.visited) {
+	                myQ.addLast(neighbor);
+	            }
+	        }
+	    }
+	}
 
 	public static void main(String[] args) {
 
 		Digraph theG = new Digraph();
-		/*
-		Vertex test = new Vertex(1, 1, 'R', "N", "E");
-		Vertex test2 = new Vertex(1, 5, 'R', "N", "S");
-		ArrayList<Vertex> output = theG.createAdj(test);
-		ArrayList<Vertex> output2 = theG.createAdj(test2);
-		System.out.println(output);
-		System.out.println(output2);
-		*/
+		Vertex root = new Vertex(1, 1, 'R', "N", "E", false);
+		theG.BFS(root, mGraph);
+		
 	}
 	
 }

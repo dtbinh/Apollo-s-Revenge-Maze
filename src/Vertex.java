@@ -8,21 +8,24 @@ public class Vertex  {
 	public char color;
 	public String direction;
 	public String isCircle;
+	public boolean visited;
 	
-	
-	public Vertex(int row, int col, char color, String isCircle, String direction) {
+	public Vertex(int row, int col, char color, String isCircle, String direction, boolean visited) {
 		super();
 		this.row = row;
 		this.col = col;
 		this.color = color;
 		this.isCircle = isCircle;
 		this.direction = direction;
+		this.visited = visited;
 	}
-
 
 	@Override
 	public String toString() {
-		return "[row=" + row + ", col=" + col + ", color=" + color
-				+ ", direction=" + direction + ", isCircle=" + isCircle + "]";
+		return "Vertex [row=" + row + ", col=" + col + ", color=" + color + ", direction=" + direction + ", isCircle="
+				+ isCircle + ", visited=" + visited + "]";
 	}
+
+
+
 }
